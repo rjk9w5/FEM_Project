@@ -4,7 +4,7 @@ function [elementStress, elementStrain] = ElementStressStrain(nodes,meshNodes,el
         TriangleElementMatrices(nodes,meshNodes);
 
 % TODO: compute element stress and strain (replace next two lines)
-elementStrain = ones(3,1);
-elementStress = ones(3,1);
+elementStrain = B*elementDisplacements;
+elementStress = tangentMatrix*elementStrain;
 
 end
