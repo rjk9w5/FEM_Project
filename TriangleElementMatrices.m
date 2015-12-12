@@ -37,9 +37,9 @@ for qp = 1:numberOfQuadraturePoints
     
     % TODO (second): compute the B matrix and Jacobian, J (replace next two
     % lines.
-size(derivativeMat(2,:))
-size(y)
-    J = [dot(x,derivativeMat(1,:)) dot(y,derivativeMat(:,1)); 
+% size(derivativeMat(2,:))
+% size(y)
+    J = [dot(x,derivativeMat(1,:)) dot(y,derivativeMat(1,:)); 
         dot(x,derivativeMat(2,:)), dot(y,derivativeMat(2,:))];
     derivativeMatxy = J\derivativeMat;
     B = zeros(3,6);
@@ -52,6 +52,8 @@ size(y)
     % Keep the line below, this is right.
     localStiffnessMatrix = localStiffnessMatrix ...
      + ((B') * tangentMatrix * B) .* det(J) .* quadratureWeigts(qp,1);
+
+     % size(((B') * tangentMatrix * B) .* det(J) .* quadratureWeigts(qp,1))
 end
 
 % assume no body force so the local force vector is zero
