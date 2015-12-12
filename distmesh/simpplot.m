@@ -5,10 +5,18 @@ function simpplot(p,t,expr,bcol,icol,nodes,tris)
 dim=size(p,2);
 switch dim
  case 2
-  if nargin<4 | isempty(bcol), bcol=[.8,.9,1]; end
-  if nargin<5 | isempty(icol), icol=[0,0,0]; end
-  if nargin<6, nodes=0; end
-  if nargin<7, tris=0; end
+  if nargin<4 || isempty(bcol)
+      bcol=[.8,.9,1]; 
+  end
+  if nargin<5 || isempty(icol)
+    icol=[0,0,0]; 
+  end
+  if nargin<6
+    nodes=0; 
+  end
+  if nargin<7
+    tris=0; 
+  end
   
   trimesh(t,p(:,1),p(:,2),0*p(:,1),'facecolor',bcol,'edgecolor','k');
   if nodes==1
@@ -31,8 +39,12 @@ switch dim
   axis off
   ax=axis;axis(ax*1.001);
  case 3
-  if nargin<4 | isempty(bcol), bcol=[.8,.9,1]; end
-  if nargin<5 | isempty(icol), icol=[.9,.8,1]; end
+  if nargin<4 || isempty(bcol)
+    bcol=[.8,.9,1]; 
+  end
+  if nargin<5 || isempty(icol)
+    icol=[.9,.8,1]; 
+  end
   
   if size(t,2)==4
     tri1=surftri(p,t);
@@ -48,7 +60,7 @@ switch dim
     end
   else
     tri1=t;
-    if nargin>2 & ~isempty(expr)
+    if nargin>2 && ~isempty(expr)
       incl=find(eval(expr));
       tri1=tri1(any(ismember(tri1,incl),2),:);
     end
