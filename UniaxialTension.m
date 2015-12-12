@@ -33,7 +33,7 @@ initialGlobalStiffnessMatrix = globalStiffnessMatrix;
 % some parameters.
 matSize = size(globalForceVector);
 globalDegreesOfFreedom = matSize(1,1);
-tol = 10^-6;
+tol = 10^-4;
 zeroVector = zeros(globalDegreesOfFreedom,1);
 numberOfNodes = size(meshNodes);
 
@@ -47,25 +47,26 @@ for nodeIndex=1:numberOfNodes
     % TODO (first): apply displacement boundary conditions // done! :)
     % fix the displacement to be zero on the bottom
     
+
     if abs(y-0) <=tol %%checks to see if the node is at the bottom
         
-        globalStiffnessMatrix(:,uIndex)=0;
+        globalStiffnessMatrix(uIndex,:)=0;
         globalStiffnessMatrix(uIndex,uIndex)=1;
-        globalForceVector(uIndex)=0;
-        globalStiffnessMatrix(:,vIndex)=0;
+        globalForceVector(uIndex,1)=0;
+        globalStiffnessMatrix(vIndex,:)=0;
         globalStiffnessMatrix(vIndex,vIndex)=1;
-        globalForceVector(vIndex)=0;
+        globalForceVector(vIndex,1)=0;
         
     end
     
-    if abs(y-(2*h+2*r+L))<=tol %%checks to see if the node is on the top of the mesh
+    if abs(y-(2*h+2*r+L)) <= tol %%checks to see if the node is on the top of the mesh
         
-        globalStiffnessMatrix(:,uIndex)=0;
+        globalStiffnessMatrix(uIndex,:)=0;
         globalStiffnessMatrix(uIndex,uIndex)=1;
-        globalForceVector(uIndex)=0;
-        globalStiffnessMatrix(:,vIndex)=0;
+        globalForceVector(uIndex,1)=0;
+        globalStiffnessMatrix(vIndex,:)=0;
         globalStiffnessMatrix(vIndex,vIndex)=1;
-        globalForceVector(vIndex)=appliedDisplacement;
+        globalForceVector(vIndex,1)=appliedDisplacement;
         
     end
     
