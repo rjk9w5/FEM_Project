@@ -6,6 +6,7 @@ h = 1; % m
 r = 1; % m
 A = 2*w - 4*r;
 L = 0.2*A; % m
+%%declaring a tollerence
 
 % boundary condition
 appliedDisplacement= 0.001*L; % apply 0.1% cross-head strain
@@ -43,8 +44,31 @@ for nodeIndex=1:numberOfNodes
     x = meshNodes(nodeIndex,1);
     y = meshNodes(nodeIndex,2);
     
-    % TODO (first): apply displacement boundary conditions
+    % TODO (first): apply displacement boundary conditions // done! :)
     % fix the displacement to be zero on the bottom
+    
+    if abs(y) <=tol %%checks to see if the node is at the bottom
+        
+        globalStiffnessMatrix(:,uIndex)=0;
+        globalStiffnessMatrix(uIndex,uIndex)=1;
+        globalForceVector(uIndex)=0;
+        globalStiffnessMatrix(:,vIndex)=0;
+        globalStiffnessMatrix(vIndex,vIndex)=1;
+        globalForceVector(vIndex)=0;
+        
+    end
+    
+    if abs(y-(2*h+2*r+L))<=tol %%checks to see if the node is on the top of the mesh
+        
+        globalStiffnessMatrix(:,uIndex)=0;
+        globalStiffnessMatrix(uIndex,uIndex)=1;
+        globalForceVector(uIndex)=0;
+        globalStiffnessMatrix(:,vIndex)=0;
+        globalStiffnessMatrix(vIndex,vIndex)=1;
+        globalForceVector(vIndex)=appliedDisplacement;
+        
+    end
+    
 
 end
 
@@ -61,16 +85,25 @@ for nodeIndex=1:numberOfNodes
     x = meshNodes(nodeIndex,1);
     y = meshNodes(nodeIndex,2);
     
-    % TODO (second): sum up total nodal forces on the bottom surface
+    % TODO (second): sum up total nodal forces on the bottom surface Done :)
     % if the current node is on the bottom surface, add it's force in the
     % vertical direction to totalForce
+    
+    if abs(y)<=tol  %%checks to see if the node is on the bottom
+        
+        totalForce=totalForce+nodalForces(nodeIndex);
+        
+    end
 
 end
 
-% TODO (third): compute engineering stress and strain
+% TODO (third): compute engineering stress and strain  Done :)
 % compute engineerings stress and strain
+engineeringStress=-f/A;
+engineeringStrain=appliedDisplacement/L;
 
 % TODO (fourth): compute apparent Youngs modulus
+E=engineeringStress/EngineeringStrain
 
 % compute displacement and strain field for plotting
 [stresses,strains] = NodalStressStrain(meshNodes,meshElems,U,degreesOfFreedomPerNode);
