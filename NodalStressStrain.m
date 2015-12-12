@@ -49,8 +49,8 @@ delete(h);
 for i=1:numberOfNodes
    % TODO (second): compute the averate stress and strain at each node by diving the
    % sum by the number of adjacent elements. Replace the next two lines.
-   nodalStresses(:,i) = ones(3,1);
-   nodalStrains(:,i) = ones(3,1);
+   nodalStresses(:,i) = nodalStresses(:,i)/m(1,i);
+   nodalStrains(:,i) = nodalStrains(:,i)/m(1,i);
 end
 
 end
