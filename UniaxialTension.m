@@ -99,11 +99,11 @@ end
 
 % TODO (third): compute engineering stress and strain  Done :)
 % compute engineerings stress and strain
-engineeringStress=-f/A;
+engineeringStress=-totalForce/A;
 engineeringStrain=appliedDisplacement/L;
 
-% TODO (fourth): compute apparent Youngs modulus
-E=engineeringStress/EngineeringStrain
+% TODO (fourth): compute apparent Youngs modulus Done :)
+E=engineeringStress/engineeringStrain
 
 % compute displacement and strain field for plotting
 [stresses,strains] = NodalStressStrain(meshNodes,meshElems,U,degreesOfFreedomPerNode);

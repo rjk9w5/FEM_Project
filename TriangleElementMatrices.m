@@ -37,8 +37,11 @@ for qp = 1:numberOfQuadraturePoints
     
     % TODO (second): compute the B matrix and Jacobian, J (replace next two
     % lines.
+<<<<<<< HEAD
 % size(derivativeMat(2,:))
 % size(y)
+=======
+>>>>>>> 1f27f28e9a27aa7034ceea5c88897ef38a7731ad
     J = [dot(x,derivativeMat(1,:)) dot(y,derivativeMat(1,:)); 
         dot(x,derivativeMat(2,:)), dot(y,derivativeMat(2,:))];
     derivativeMatxy = J\derivativeMat;
