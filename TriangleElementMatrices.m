@@ -1,5 +1,5 @@
 function [localStiffnessMatrix, localForceVector, B, tangentMatrix] = TriangleElementMatrices(nodes,nodeMesh)
-
+%%mitch was here
 % element properties (e.g. aluminum)
 PoissonRatio = 0.32;
 YoungModulus = 70*10^9;
