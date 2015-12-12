@@ -13,12 +13,12 @@ quadraturePoints = [1/3, 1/3];
 quadratureWeigts = [1/2];
 
 % extract nodal coordinates from mesh data
-x(1) = nodeMesh(nodes(1),1);
-y(1) = nodeMesh(nodes(1),2);
-x(2) = nodeMesh(nodes(2),1);
-y(2) = nodeMesh(nodes(2),2);
-x(3) = nodeMesh(nodes(3),1);
-y(3) = nodeMesh(nodes(3),2);
+x(1,1) = nodeMesh(nodes(1),1);
+y(1,1) = nodeMesh(nodes(1),2);
+x(1,2) = nodeMesh(nodes(2),1);
+y(1,2) = nodeMesh(nodes(2),2);
+x(1,3) = nodeMesh(nodes(3),1);
+y(1,3) = nodeMesh(nodes(3),2);
 
 derivativeMat = [-1 1 0; -1 0 1];
 
