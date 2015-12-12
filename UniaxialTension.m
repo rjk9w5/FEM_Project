@@ -47,7 +47,7 @@ for nodeIndex=1:numberOfNodes
     % TODO (first): apply displacement boundary conditions // done! :)
     % fix the displacement to be zero on the bottom
     
-    if abs(y) <=tol %%checks to see if the node is at the bottom
+    if abs(y-0) <=tol %%checks to see if the node is at the bottom
         
         globalStiffnessMatrix(:,uIndex)=0;
         globalStiffnessMatrix(uIndex,uIndex)=1;
@@ -85,10 +85,9 @@ for nodeIndex=1:numberOfNodes
     x = meshNodes(nodeIndex,1);
     y = meshNodes(nodeIndex,2);
     
-    % TODO (second): sum up total nodal forces on the bottom surface Done :)
+    % TODO (second): sum up total nodal forces on the bottom surface, Done :)
     % if the current node is on the bottom surface, add it's force in the
     % vertical direction to totalForce
-    
     if abs(y)<=tol  %%checks to see if the node is on the bottom
         
         totalForce=totalForce+nodalForces(nodeIndex);
@@ -100,7 +99,7 @@ end
 % TODO (third): compute engineering stress and strain  Done :)
 % compute engineerings stress and strain
 engineeringStress=-totalForce/A;
-engineeringStrain=appliedDisplacement/L;
+engineeringStrain=appliedDisplacement/(L+2*r+2*h);
 
 % TODO (fourth): compute apparent Youngs modulus Done :)
 E=engineeringStress/engineeringStrain
