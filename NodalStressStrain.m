@@ -38,8 +38,8 @@ for elem=1:numberOfElements
        % stress and strain of elem. Also, increment the number of
        % elementsPerNode for each node on this element.
        
-       nodalStresses(:,node) = nodalStresses(:,node) + elementStress(:);
-       nodalStrains(:, node) = nodalStrains(:,node) + elementStrain(:);
+       nodalStresses(:,node) = nodalStresses(:,node) + elementStress;
+       nodalStrains(:, node) = nodalStrains(:,node) + elementStrain;
        m(1,node) = m(1,node) + 1;
 
     end

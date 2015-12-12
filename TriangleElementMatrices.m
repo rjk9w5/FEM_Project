@@ -24,7 +24,7 @@ derivativeMat = [-1 1 0; -1 0 1];
 
 % TODO (first): compute the tangent matrix
 
-tangentMatrix = YoungModulus / (1 - PoissonRatio) * [1 PoissonRatio 0; PoissonRatio 1 0; 0 0 (1 - PoissonRatio)/2];
+tangentMatrix = YoungModulus / (1 - PoissonRatio^2) * [1 PoissonRatio 0; PoissonRatio 1 0; 0 0 (1 - PoissonRatio)/2];
 % Replace next line
 %tangentMatrix = ones(3,3);
 
