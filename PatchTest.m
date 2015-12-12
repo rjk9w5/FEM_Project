@@ -1,5 +1,5 @@
 addpath(genpath('distMesh'));
-addpath(genpath('postProcessing'));
+addpath(genpath('postprocessing'));
 
 % generate mesh of square for patch test
 meshNodes = zeros(9,2);
