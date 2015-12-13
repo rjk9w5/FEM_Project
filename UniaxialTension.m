@@ -5,7 +5,7 @@ w = 4; % m
 h = 1; % m
 r = 1; % m
 A = 2*w - 4*r;
-L = 0.2*A; % m
+L = .975*A; % m
 %%declaring a tollerence
 
 % boundary condition
@@ -89,9 +89,9 @@ for nodeIndex=1:numberOfNodes
     % if the current node is on the bottom surface, add it's force in the
     % vertical direction to totalForce
     
-    if abs(y)<=tol  %%checks to see if the node is on the bottom
+    if abs(y) < tol  %%checks to see if the node is on the bottom
         
-        totalForce=totalForce+nodalForces(nodeIndex);
+        totalForce = totalForce + nodalForces(nodeIndex);
         
     end
 
@@ -99,11 +99,11 @@ end
 
 % TODO (third): compute engineering stress and strain  Done :)
 % compute engineerings stress and strain
-engineeringStress=-totalForce/A;
-engineeringStrain=appliedDisplacement/L;
+engineeringStress = -totalForce/(A);
+engineeringStrain = appliedDisplacement/L;
 
 % TODO (fourth): compute apparent Youngs modulus Done :)
-E=engineeringStress/engineeringStrain
+E = engineeringStress/engineeringStrain
 
 % compute displacement and strain field for plotting
 [stresses,strains] = NodalStressStrain(meshNodes,meshElems,U,degreesOfFreedomPerNode);

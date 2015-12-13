@@ -1,13 +1,13 @@
 close all
 clear
 
-addpath(genpath('distMesh'));
-addpath(genpath('postProcessing'));
+addpath(genpath('distmesh'));
+addpath(genpath('postprocessing'));
 
 % input mesh parameters
 sideLength = 2;
-radiusOfHole = 0.2;
-holeMeshSize = 0.2*radiusOfHole;
+radiusOfHole = .2;
+holeMeshSize = 0.03*radiusOfHole;
 maximumMeshSize = sideLength/10;
 
 % input boundary condition
