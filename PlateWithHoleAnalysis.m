@@ -30,8 +30,12 @@ for nodeIndex=1:numberOfNodes
    
    % TODO (first): compute number of nodes on top and bottom surfaces
    % See below for (wrong) example. Replace the following code.
-   if abs(y-0.12345) < tol
+   if abs(y-1) < tol
        numNodesOnTop = numNodesOnTop + 1;
+   end
+
+   if abs(y+1) < tol
+       numNodesOnBottom = numNodesOnBottom + 1;
    end
 
 end
@@ -69,9 +73,34 @@ for nodeIndex=1:numberOfNodes
     
     % TODO (second): apply force boundary and displcement boundary conditions
     % See below for (wrong) example. Need to replace.
-    if (abs(x) < tol )|| (abs(y) < tol)
-        % apply half since in edge
+    if (abs(y + 1) < tol )
+      % apply half since in edge
+      if(abs(x + 1) < tol || abs(x - 1) < tol)
+        globalForceVector(yForceIndex,1) = globalForceVector(yForceIndex,1) - forcePerElementTop/2;
+      else
+        globalForceVector(yForceIndex,1) = globalForceVector(yForceIndex,1) - forcePerElementTop;
+      end
+    elseif(abs(y - 1) < tol)
+      if(abs(x + 1) < tol || abs(x - 1) < tol)
         globalForceVector(yForceIndex,1) = globalForceVector(yForceIndex,1) + forcePerElementTop/2;
+      else
+        globalForceVector(yForceIndex,1) = globalForceVector(yForceIndex,1) + forcePerElementTop;
+      end
+    end
+
+    if(abs(x-1) < tol && abs(y+1) < tol)
+      globalStiffnessMatrix(yForceIndex,:) = 0;
+      globalStiffnessMatrix(yForceIndex,yForceIndex) = 1;
+      globalForceVector(yForceIndex,1) = 0;
+    end
+    if(abs(x+1) < tol && abs(y+1) < tol)
+      globalStiffnessMatrix(yForceIndex,:) = 0;
+      globalStiffnessMatrix(yForceIndex,yForceIndex) = 1;
+      globalForceVector(yForceIndex,1) = 0;
+
+      globalStiffnessMatrix(xForceIndex,:) = 0;
+      globalStiffnessMatrix(xForceIndex,xForceIndex) = 1;
+      globalForceVector(xForceIndex,1) = 0;
     end
 
 end
